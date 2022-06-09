@@ -2,66 +2,47 @@ using UnityEngine;
 
 public class PlayerController: MonoBehaviour
 {
-    /// <summary>左右移動する力</summary>
-    [SerializeField] float m_movePower = 5f;
-    /// <summary>ジャンプする力</summary>
-    [SerializeField] float m_jumpPower = 15f;
-    Rigidbody2D m_rb = default;
-    /// <summary>水平方向の入力値</summary>
-    float m_h;
-    float m_scaleX;
-    /// <summary>最初に出現した座標</summary>
-    Vector3 m_initialPosition;
-    public GroundCheck ground;
-    private string groundTag = "Ground";
-    private bool canJump = true;
-    int m_jumpCount = 0;
-
-    private bool isGround = false;
+    //左右移動する力
+    [SerializeField] float _moveSpeed = 5f;
+    Rigidbody2D _rb = default;
+    //弾丸のプレハブ
+    [SerializeField] GameObject _shellPrefab = default;
+    //銃口の位置を設定するオブジェクト
+    [SerializeField] Transform _muzzle = default;
+    //水平方向の入力値
+    float _h;
+    float _scaleX;
+    float _v;
+    //最初に出現した座標
+    Vector3 _initialPosition;
 
     void Start()
     {
-        m_rb = GetComponent<Rigidbody2D>();
+        _rb = GetComponent<Rigidbody2D>();
         // 初期位置を覚えておく
-        m_initialPosition = this.transform.position;
+        _initialPosition = this.transform.position;
     }
 
     void Update()
     {
-        isGround = ground.IsGround();
+        
         // 入力を受け取る
-        m_h = Input.GetAxisRaw("Horizontal");
-
+        _h = Input.GetAxisRaw("Horizontal");
+        _v = Input.GetAxisRaw("Vertical");
 
         // 各種入力を受け取る
-        if (m_jumpCount < 1 && Input.GetButtonDown("Jump"))
+
+        if (Input.GetButtonDown("Fire1"))
         {
-            //Debug.Log("ここにジャンプする処理を書く。");
-            m_rb.AddForce(Vector2.up * m_jumpPower, ForceMode2D.Force);
-            m_jumpCount++;
-        }
-        // 下に行きすぎたら初期位置に戻す
-        if (this.transform.position.y < -10f)
-        {
-            this.transform.position = m_initialPosition;
+            Debug.Log("ここに弾を発射する処理を書く。");
+            GameObject go = Instantiate(_shellPrefab);
+            go.transform.position = _muzzle.position;
         }
     }
 
     private void FixedUpdate()
     {
-        // 力を加えるのは FixedUpdate で行う
-        m_rb.AddForce(Vector2.right * m_h * m_movePower, ForceMode2D.Force);
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag(groundTag))
-        {
-            canJump = true;
-        }
-        m_jumpCount = 0;
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        canJump = false;
+        Vector3 Direction = new Vector3(_h, _v).normalized;
+        _rb.velocity = Direction * _moveSpeed;
     }
 }
