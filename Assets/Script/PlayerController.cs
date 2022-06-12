@@ -7,6 +7,8 @@ public class PlayerController: MonoBehaviour
     [SerializeField] GameObject _shellPrefab = default;
     [SerializeField] Transform _muzzle = default;
     [SerializeField] float _interval;
+    [SerializeField] GameObject _bulletPrefab;
+    [SerializeField] Transform _crosshair;
     float _h;
     float _v;
     float _timer;
@@ -22,7 +24,7 @@ public class PlayerController: MonoBehaviour
         _v = Input.GetAxisRaw("Vertical");
         _timer += Time.deltaTime;
 
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButton("Fire1"))
         {
             if (_timer > _interval)
             {
@@ -30,6 +32,12 @@ public class PlayerController: MonoBehaviour
                 _timer = 0;
             }
         }
+        if (Input.GetButtonDown("Fire2"))
+        {
+            Instantiate(_bulletPrefab, _muzzle.position, transform.rotation);
+        }
+        Vector2 dir = _crosshair.position - transform.position;
+        transform.up = dir;
     }
 
     private void FixedUpdate()
