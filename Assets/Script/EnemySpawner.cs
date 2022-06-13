@@ -9,6 +9,8 @@ public class EnemySpawner : MonoBehaviour
     // “G‚ª—N‚­üŠú
     [SerializeField] float _minDistance;
     [SerializeField] float _maxDistance;
+    // ƒ^[ƒQƒbƒg
+    //[SerializeField] Transform target;
 
     IEnumerator _spawn;
 
