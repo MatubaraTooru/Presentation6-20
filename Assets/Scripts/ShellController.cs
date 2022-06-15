@@ -6,9 +6,7 @@ public class ShellController : MonoBehaviour
 {
     [SerializeField] float m_initialSpeed = 5f;
     [SerializeField] Transform _crosshair;
-    float _timer;
     float _cTimer;
-    [SerializeField] float _destroyTime;
     [SerializeField] float _i;
     // Start is called before the first frame update
     void Start()
@@ -17,11 +15,6 @@ public class ShellController : MonoBehaviour
     }
     private void Update()
     {
-        _timer += Time.deltaTime;
-        if (_timer > _destroyTime)
-        {
-            Destroy(gameObject);
-        }
         _cTimer += Time.deltaTime;
         if (_cTimer == _i)
         {

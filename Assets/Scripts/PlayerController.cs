@@ -3,19 +3,22 @@ using UnityEngine;
 public class PlayerController: MonoBehaviour
 {
     [SerializeField] float _moveSpeed = 5f;
-    Rigidbody2D _rb = default;
-    [SerializeField] GameObject _shellPrefab = default;
-    [SerializeField] Transform _muzzle = default;
-    [SerializeField] float _interval;
+    Rigidbody2D _rb;
     [SerializeField] GameObject _bulletPrefab;
-    [SerializeField] Transform _crosshair;
+    [SerializeField] Transform _muzzle;
+    [SerializeField] float _interval;
+    [SerializeField] GameObject _grenadePrefab;
+    GameObject _crosshair;
     float _h;
     float _v;
     float _timer;
+    AudioSource _gunshot;
 
     void Start()
     {
+        _crosshair = GameObject.FindGameObjectWithTag("Crosshair");
         _rb = GetComponent<Rigidbody2D>();
+        _gunshot = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -28,15 +31,16 @@ public class PlayerController: MonoBehaviour
         {
             if (_timer > _interval)
             {
-                Instantiate(_shellPrefab, _muzzle.position, this.transform.rotation);
+                Instantiate(_bulletPrefab, _muzzle.position, this.transform.rotation);
                 _timer = 0;
+                
             }
         }
         if (Input.GetButtonDown("Fire2"))
         {
-            Instantiate(_bulletPrefab, _muzzle.position, transform.rotation);
+            Instantiate(_grenadePrefab, _muzzle.position, transform.rotation);
         }
-        Vector2 dir = _crosshair.position - transform.position;
+        Vector2 dir = _crosshair.transform.position - transform.position;
         transform.up = dir;
     }
 

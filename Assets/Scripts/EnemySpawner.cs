@@ -22,7 +22,7 @@ public class EnemySpawner : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) EndSpawn();
+        
     }
 
     // 敵のスポーン開始
