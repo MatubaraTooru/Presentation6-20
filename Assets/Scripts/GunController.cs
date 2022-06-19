@@ -8,10 +8,11 @@ public class GunController : MonoBehaviour
     [SerializeField] Transform _muzzle;
     [SerializeField] float _interval;
     float _timer;
+    AudioSource _s;
     // Start is called before the first frame update
     void Start()
     {
-        
+        _s = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -20,6 +21,7 @@ public class GunController : MonoBehaviour
         _timer += Time.deltaTime;
         if (_timer > _interval)
         {
+            _s.Play();
             Instantiate(_bulletPrefab, _muzzle.position, this.transform.rotation);
             _timer = 0;
         }

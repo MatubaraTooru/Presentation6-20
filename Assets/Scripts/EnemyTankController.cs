@@ -4,45 +4,42 @@ using UnityEngine;
 
 public class EnemyTankController : MonoBehaviour
 {
-    [SerializeField] float _speed;
-    GameObject[] _targets;
-    Rigidbody2D _rb;
-    Transform _tgpos;
-    GameObject _player;
-    Vector3 _move;
-    float _timer;
-    [SerializeField] float _destroyTime;
-    [SerializeField] int _life;
+    public int _life;
     [SerializeField] int _score;
     ScoreManager _scMa;
+    [SerializeField] GameObject _shellPrefab;
+    [SerializeField] Transform _muzzle;
+    [SerializeField] float _tInterval;
+    float _tTimer;
+    [SerializeField] GameObject _bulletPrefab;
+    [SerializeField] Transform _mgMuzzle;
+    [SerializeField] float _mgInterval;
+    float _mgTimer;
+    AudioSource[] _s;
     // Start is called before the first frame update
     void Start()
     {
-        _targets = GameObject.FindGameObjectsWithTag("Target");
-
-        _rb = gameObject.GetComponent<Rigidbody2D>();
-
-        int i = Random.Range(0, _targets.Length);
-        _tgpos = _targets[i].gameObject.GetComponent<Transform>();
-
-        _move = _tgpos.position - transform.position;
-
         _scMa = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
+        _s = GetComponents<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        _timer += Time.deltaTime;
-        if (_timer > _destroyTime)
+        _tTimer += Time.deltaTime;
+        if (_tTimer > _tInterval)
         {
-            Destroy(gameObject);
+            _s[0].Play();
+            Instantiate(_shellPrefab, _muzzle.position, this.transform.rotation);
+            _tTimer = 0;
         }
-    }
-    private void FixedUpdate()
-    {
 
-        _rb.velocity = _move.normalized * _speed;
+        _mgTimer += Time.deltaTime;
+        if (_mgTimer > _mgInterval)
+        {
+            Instantiate(_bulletPrefab, _mgMuzzle.position, transform.rotation);
+            _mgTimer = 0;
+        }
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -53,7 +50,7 @@ public class EnemyTankController : MonoBehaviour
         if (_life == 0)
         {
             _scMa.GetScore(_score);
-            Destroy(gameObject);
+            Destroy(gameObject, 0.01f);
         }
     }
 }

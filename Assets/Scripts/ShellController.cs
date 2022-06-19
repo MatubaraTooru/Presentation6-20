@@ -6,7 +6,6 @@ public class ShellController : MonoBehaviour
 {
     [SerializeField] float m_initialSpeed = 5f;
     Transform _crosshair;
-    float _cTimer;
     [SerializeField] float _i;
     // Start is called before the first frame update
     void Start()

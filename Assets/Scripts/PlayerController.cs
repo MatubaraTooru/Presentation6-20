@@ -21,8 +21,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject _raText;
     Animator _anim;
     public int _life;
-    [SerializeField] GameObject _lifeText;
-    [SerializeField] GameObject _gameOverPanel;
     void Start()
     {
         _crosshair = GameObject.FindGameObjectWithTag("Crosshair");
@@ -76,11 +74,8 @@ public class PlayerController : MonoBehaviour
         }
         //残弾の表示
         _raText.GetComponent<Text>().text = _ra.ToString() + "/30";
-        //残り体力の表示
-        _lifeText.GetComponent<Text>().text = _life.ToString();
 
         PlayAudio();
-        GameOver();
     }
 
     private void FixedUpdate()
@@ -115,12 +110,9 @@ public class PlayerController : MonoBehaviour
         {
             _life -= 1;
         }
-    }
-    public void GameOver()
-    {
-        if (_life == 0)
+        if (collision.gameObject.CompareTag("Shell") && _life != 0)
         {
-            _gameOverPanel.SetActive(true);
+            _life -= 3;
         }
     }
 }
