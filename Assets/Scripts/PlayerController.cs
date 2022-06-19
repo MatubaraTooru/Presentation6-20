@@ -18,15 +18,16 @@ public class PlayerController : MonoBehaviour
     AudioSource[] _as;
     int _ra = 30;
     [SerializeField] int _ms;
-    GameObject _raText;
+    [SerializeField] GameObject _raText;
     Animator _anim;
-    [SerializeField] int _life;
+    public int _life;
+    [SerializeField] GameObject _lifeText;
+    [SerializeField] GameObject _gameOverPanel;
     void Start()
     {
         _crosshair = GameObject.FindGameObjectWithTag("Crosshair");
         _rb = GetComponent<Rigidbody2D>();
         _as = gameObject.GetComponents<AudioSource>();
-        _raText = GameObject.Find("RAText");
         _anim = GetComponent<Animator>();
     }
 
@@ -34,7 +35,7 @@ public class PlayerController : MonoBehaviour
     {
         //各入力の受付とそれに伴う処理
         _h = Input.GetAxisRaw("Horizontal");
-        _v = Input.GetAxisRaw("Vertical");
+        //_v = Input.GetAxisRaw("Vertical");
 
         _timer += Time.deltaTime;
 
@@ -65,7 +66,7 @@ public class PlayerController : MonoBehaviour
                 _ra = _ms;
             }));
         }
-        if (_h > 0 || _v > 0)
+        if (_h != 0 || _v != 0)
         {
             _anim.SetBool("move", true);
         }
@@ -75,8 +76,11 @@ public class PlayerController : MonoBehaviour
         }
         //残弾の表示
         _raText.GetComponent<Text>().text = _ra.ToString() + "/30";
+        //残り体力の表示
+        _lifeText.GetComponent<Text>().text = _life.ToString();
 
         PlayAudio();
+        GameOver();
     }
 
     private void FixedUpdate()
@@ -104,5 +108,19 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
 
         action();
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Bullet") && _life != 0)
+        {
+            _life -= 1;
+        }
+    }
+    public void GameOver()
+    {
+        if (_life == 0)
+        {
+            _gameOverPanel.SetActive(true);
+        }
     }
 }

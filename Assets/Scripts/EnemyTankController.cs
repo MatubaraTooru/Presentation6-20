@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public class EnemyTankController : MonoBehaviour
 {
     [SerializeField] float _speed;
     GameObject[] _targets;
@@ -18,12 +18,6 @@ public class EnemyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _player = GameObject.FindGameObjectWithTag("Player");
-        if (_player==null)
-        {
-            Debug.Log("Žæ“¾‚Å‚«‚Ü‚¹‚ñ‚Å‚µ‚½");
-        }
-
         _targets = GameObject.FindGameObjectsWithTag("Target");
 
         _rb = gameObject.GetComponent<Rigidbody2D>();
@@ -39,8 +33,6 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.up = _player.transform.position - transform.position;
-        Debug.DrawLine(_player.transform.position,gameObject.transform.position);
         _timer += Time.deltaTime;
         if (_timer > _destroyTime)
         {
@@ -49,7 +41,7 @@ public class EnemyController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        
+
         _rb.velocity = _move.normalized * _speed;
     }
     private void OnCollisionEnter2D(Collision2D collision)

@@ -1,10 +1,55 @@
 fileFormatVersion: 2
-guid: 17194c69630d57e49b95e767f3bc9b56
+guid: fa2f7f1c38a40014983f5776df59d047
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6039424011381216813
-    second: BrightForest-A5 1_0
+      213: -8115490689833358715
+    second: tank (1) (1)_0
+  - first:
+      213: -574731747013827580
+    second: tank (1) (1)_1
+  - first:
+      213: -5823567975563657433
+    second: tank (1) (1)_2
+  - first:
+      213: -9131387186935312104
+    second: tank (1) (1)_3
+  - first:
+      213: 5836888574234506724
+    second: tank (1) (1)_4
+  - first:
+      213: 5057257688950799727
+    second: tank (1) (1)_5
+  - first:
+      213: 2616776246739106509
+    second: tank (1) (1)_6
+  - first:
+      213: 3040972083661128980
+    second: tank (1) (1)_7
+  - first:
+      213: -8124517874123936112
+    second: tank (1) (1)_8
+  - first:
+      213: 8691115917285954975
+    second: tank (1) (1)_9
+  - first:
+      213: -8363368208444193517
+    second: tank (1) (1)_10
+  - first:
+      213: -6317456699058796162
+    second: tank (1) (1)_11
+  - first:
+      213: -8040500625298698674
+    second: tank (1) (1)_12
+  - first:
+      213: 766665448505453061
+    second: tank (1) (1)_13
+  - first:
+      213: 6982272613697656276
+    second: tank (1) (1)_14
+  - first:
+      213: 1637896137921818309
+    second: tank (1) (1)_15
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -49,7 +94,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 130
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -94,22 +139,64 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BrightForest-A5 1_0
+      name: tank (1) (1)_0
       rect:
         serializedVersion: 2
-        x: 95
-        y: 33
-        width: 32
-        height: 70
+        x: 121
+        y: 70
+        width: 689
+        height: 1167
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3d968a12cd7af2ca0800000000000000
-      internalID: -6039424011381216813
+      spriteID: 58a2e7e173cff5f80800000000000000
+      internalID: -8115490689833358715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tank (1) (1)_14
+      rect:
+        serializedVersion: 2
+        x: 931
+        y: 789
+        width: 859
+        height: 327
+      alignment: 9
+      pivot: {x: 0.25, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d51360d2f306e060800000000000000
+      internalID: 6982272613697656276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tank (1) (1)_15
+      rect:
+        serializedVersion: 2
+        x: 960
+        y: 100
+        width: 782
+        height: 553
+      alignment: 9
+      pivot: {x: 0.44, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ce60d70cd9fab610800000000000000
+      internalID: 1637896137921818309
       vertices: []
       indices: 
       edges: []
