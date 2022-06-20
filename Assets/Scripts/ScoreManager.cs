@@ -11,7 +11,7 @@ public class ScoreManager : MonoBehaviour
     [SerializeField]
     [Header("スコアUI")] Text _scoreText;
     [SerializeField]
-    [Header("最終スコアUI")] Text _fainalScoreText;
+    [Header("最終スコアUI")] Text[] _fainalScoreText;
 
     [SerializeField]
     [Header("ハイスコア")] static int _highScore;
@@ -19,7 +19,7 @@ public class ScoreManager : MonoBehaviour
     [SerializeField]
     [Header("ハイスコアUI")] Text _highScoreText;
     [SerializeField]
-    [Header("最終ハイスコアUI")] Text _fainalHighScoreText;
+    [Header("最終ハイスコアUI")] Text[] _fainalHighScoreText;
 
     [SerializeField]
     [Header("カンストスコア")] int _maxScore = 99999;
@@ -40,8 +40,10 @@ public class ScoreManager : MonoBehaviour
             HighScore();
         }
         _scoreText.text = "スコア" + _score.ToString();
-        _fainalScoreText.text ="最終スコア" + _score.ToString();
-        _fainalHighScoreText.text ="ハイスコア" + _highScore.ToString();
+        int l = Random.Range(0, _fainalScoreText.Length);
+        _fainalScoreText[l].text ="最終スコア" + _score.ToString();
+        int r = Random.Range(0, _fainalHighScoreText.Length);
+        _fainalHighScoreText[r].text ="ハイスコア" + _highScore.ToString();
     }
     void HighScore()
     {
